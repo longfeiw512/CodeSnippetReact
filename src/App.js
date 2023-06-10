@@ -1,7 +1,8 @@
-import { FileOutlined, PieChartOutlined, UserOutlined, DesktopOutlined, TeamOutlined } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { CodeOutlined, UserOutlined } from '@ant-design/icons';
+import { Layout, Menu, theme } from 'antd';
 import { useState } from 'react';
 import { Highlight, themes } from "prism-react-renderer"
+
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
   return {
@@ -12,15 +13,8 @@ function getItem(label, key, icon, children) {
   };
 }
 const items = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
-  ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <FileOutlined />),
+  getItem('Code Snippets', 'codeSnippets', <CodeOutlined />),
+  getItem('Profile', 'profile', <UserOutlined />),
 ];
 const codeBlock = `
 const GroceryItem: React.FC<GroceryItemProps> = ({ item }) => {
@@ -51,25 +45,19 @@ const App = () => {
       <Layout>
         <Header
           style={{
-            padding: 0,
+            padding: "0 0 0 20px",
             background: colorBgContainer,
           }}
-        />
+        >
+          <div className='header'>test.js</div>
+        </Header>
         <Content
           style={{
             margin: '0 16px',
           }}
         >
-          <Breadcrumb
-            style={{
-              margin: '16px 0',
-            }}
-          >
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
           <Highlight
-            theme={themes.shadesOfPurple}
+            theme={themes.github}
             code={codeBlock}
             language="tsx"
           >
@@ -92,7 +80,7 @@ const App = () => {
             textAlign: 'center',
           }}
         >
-          Ant Design ©2023 Created by Ant UED
+          Code Snippets ©2023 Created by Longfei Wang
         </Footer>
       </Layout>
     </Layout>
