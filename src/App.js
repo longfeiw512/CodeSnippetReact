@@ -1,7 +1,7 @@
 import { CodeOutlined, UserOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
-import PrismCode from "./PrismCode";
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Highlight, themes } from "prism-react-renderer"
 
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
@@ -27,8 +27,6 @@ const GroceryItem: React.FC<GroceryItemProps> = ({ item }) => {
   );
 }
 `
-const codeName = "test.js";
-
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -51,21 +49,38 @@ const App = () => {
             background: colorBgContainer,
           }}
         >
-          <div className='header'>{codeName}</div>
+          <div className='header'>test.js</div>
         </Header>
         <Content
           style={{
             margin: '0 16px',
           }}
         >
-          <PrismCode code={codeBlock} language="js" plugins={["line-numbers"]} />
+          <Highlight
+            theme={themes.github}
+            code={codeBlock}
+            language="tsx"
+          >
+            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+              <pre style={style}>
+                {tokens.map((line, i) => (
+                  <div key={i} {...getLineProps({ line })}>
+                    <span>{i + 1}</span>
+                    {line.map((token, key) => (
+                      <span key={key} {...getTokenProps({ token })} />
+                    ))}
+                  </div>
+                ))}
+              </pre>
+            )}
+          </Highlight>
         </Content>
         <Footer
           style={{
             textAlign: 'center',
           }}
         >
-          Code Snippet
+          Code Snippets ©2023 Created by Longfei Wang
         </Footer>
       </Layout>
     </Layout>
