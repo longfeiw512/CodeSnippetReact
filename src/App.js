@@ -1,9 +1,9 @@
 import { CodeOutlined, UserOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import CodeSnippetsMgmt from './CodeSnippetsMgmt/CodeSnippetsMgmt';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
   return {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Table } from "antd";
 import { List } from "immutable";
 
@@ -35,12 +35,16 @@ const CodeSnippetTable = ({ setShowingKey }) => {
         {
             title: "Creation Date",
             dataIndex: "creationDate",
-            key: "creationDate"
+            key: "creationDate",
+            render: (_, { creationDate }) =>
+                (new Date(creationDate * 1000)).toISOString()
         },
         {
             title: "Last Update Date",
             dataIndex: "lastUpdateDate",
-            key: "lastUpdateDate"
+            key: "lastUpdateDate",
+            render: (_, { lastUpdateDate }) =>
+                (new Date(lastUpdateDate * 1000)).toISOString()
         }
     ];
 
