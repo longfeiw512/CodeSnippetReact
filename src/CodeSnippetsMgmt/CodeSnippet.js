@@ -2,6 +2,7 @@ import Prism from "prismjs";
 import { Button, Select } from "antd";
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from "react";
+import CodeComment from "./CodeComment";
 
 const keyToCode = {
     1: {
@@ -97,6 +98,7 @@ const CodeSnippet = ({ showingKey, setShowingKey }) => {
                     </code>
                 </pre>
             </div>
+            <CodeComment />
         </>);
 }
 

@@ -2,6 +2,7 @@ import { CodeOutlined, UserOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 import React, { useState } from 'react';
 import CodeSnippetsMgmt from './CodeSnippetsMgmt/CodeSnippetsMgmt';
+import 'semantic-ui-css/semantic.min.css'
 
 const { Content, Footer, Sider } = Layout;
 
