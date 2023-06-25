@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CodeSnippetTable from "./CodeSnippetTable";
-import CodeSnippet from "./CodeSnippet";
+import CodeSnippetDisplay from "./CodeSnippetDisplay";
 
 const defaultShowingKey = -1;
 
@@ -9,7 +9,7 @@ const CodeSnippetsMgmt = () => {
 
   return showingKey === defaultShowingKey ?
     (<CodeSnippetTable setShowingKey={setShowingKey} />) :
-    (<CodeSnippet showingKey={showingKey} setShowingKey={setShowingKey} />);
+    (<CodeSnippetDisplay showingKey={showingKey} setShowingKey={setShowingKey} />);
 };
 
 export default CodeSnippetsMgmt;

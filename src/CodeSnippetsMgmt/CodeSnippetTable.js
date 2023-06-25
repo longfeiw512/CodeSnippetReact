@@ -1,6 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { EditOutlined } from '@ant-design/icons';
 import { Button, Table } from "antd";
 import { List } from "immutable";
+import reactCSS from "reactcss";
+import CodeSnippetCreation from "./CodeSnippetCreation";
+
+const styles = reactCSS({
+    "default": {
+        createButton: {
+            marginBottom: "20px"
+        },
+        header: {
+            fontSize: "28px",
+            fontWeight: "bold",
+            padding: "20px 0 20px 0"
+        }
+    }
+});
 
 const mock = [
     {
@@ -19,11 +35,13 @@ const mock = [
 
 const CodeSnippetTable = ({ setShowingKey }) => {
     const [codeSnippets, setCodeSnippets] = useState(List());
+    const [showCodeCreation, setShowCodeCreation] = useState(false);
     useEffect(() => {
         if (codeSnippets.size === 0) {
             setCodeSnippets(List(mock));
         }
     }, [codeSnippets, setCodeSnippets]);
+
     const columns = [
         {
             title: "Name",
@@ -50,8 +68,21 @@ const CodeSnippetTable = ({ setShowingKey }) => {
 
     return (
         <>
-            <div className="header">Your code snippets</div>
-            <Table columns={columns} dataSource={[...codeSnippets]} />
+            {showCodeCreation ? (
+                <CodeSnippetCreation />
+            ) :
+                (<>
+                    <div style={styles.header}>Your code snippets</div>
+                    <Button
+                        icon={<EditOutlined />}
+                        type="primary"
+                        style={styles.createButton}
+                        onClick={() => setShowCodeCreation(true)}
+                    >
+                        Create
+                    </Button>
+                    <Table columns={columns} dataSource={[...codeSnippets]} />
+                </>)}
         </>
     );
 };

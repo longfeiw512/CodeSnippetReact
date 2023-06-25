@@ -2,9 +2,20 @@ import { CodeOutlined, UserOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 import React, { useState } from 'react';
 import CodeSnippetsMgmt from './CodeSnippetsMgmt/CodeSnippetsMgmt';
+import Profile from "./Profile/profile";
 import 'semantic-ui-css/semantic.min.css'
 
 const { Content, Footer, Sider } = Layout;
+
+const TAB_ENUM = Object.freeze({
+  CODE: "code",
+  PROFILE: "profile"
+});
+
+const tabToComponent = {
+  [TAB_ENUM.CODE]: <CodeSnippetsMgmt />,
+  [TAB_ENUM.PROFILE]: <Profile />
+};
 
 function getItem(label, key, icon, children) {
   return {
@@ -16,12 +27,13 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem('Code Snippets', 'codeSnippets', <CodeOutlined />),
-  getItem('Profile', 'profile', <UserOutlined />),
+  getItem('Code Snippets', TAB_ENUM.CODE, <CodeOutlined />),
+  getItem('Profile', TAB_ENUM.PROFILE, <UserOutlined />),
 ];
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [selectedTab, setSelectedTab] = useState(TAB_ENUM.CODE);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -33,7 +45,13 @@ const App = () => {
     >
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <Menu
+          theme="dark"
+          defaultSelectedKeys={[selectedTab]}
+          mode="inline"
+          items={items}
+          onClick={({ key }) => setSelectedTab(key)}
+        />
       </Sider>
       <Layout>
         <Content
@@ -41,7 +59,7 @@ const App = () => {
             margin: '0 16px',
           }}
         >
-          <CodeSnippetsMgmt />
+          {tabToComponent[selectedTab]}
         </Content>
         <Footer
           style={{

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Comment, Form, Header } from 'semantic-ui-react';
-import reactCSS from 'reactcss'
+import reactCSS from 'reactcss';
 
 const styles = reactCSS({
     "default": {
